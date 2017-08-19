@@ -451,8 +451,8 @@ def main():
         pid_path = "/var/run/gerritbot/gerritbot.pid"
 
     pid = pid_file_module.TimeoutPIDLockFile(pid_path, 10)
-    with daemon.DaemonContext(pidfile=pid):
-        _main(config)
+    #with daemon.DaemonContext(pidfile=pid):
+    _main(config)
 
 
 def setup_logging(config):
