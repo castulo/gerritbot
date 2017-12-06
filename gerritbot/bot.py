@@ -190,7 +190,9 @@ class Gerrit(threading.Thread):
             data['change']['subject'],
             data['change']['url'])
         self.log.info('Compiled Message %s: %s' % (channel, msg))
-        self.ircbot.send(channel, msg)
+        # ignore events from draft patchSets
+        if data['change']['status'] != 'DRAFT':
+            self.ircbot.send(channel, msg)
 
     def ref_updated(self, channel, data):
         refName = data['refUpdate']['refName']
